@@ -17,6 +17,7 @@ function getDirContents($dir, &$results = array()) {
     return $results;
 }
 var_dump(getDirContents(__DIR__ . '/../public/'));
+var_dump(getDirContents('/tmp/'));
 return;
 
 require __DIR__ . '/../public/index.php';
