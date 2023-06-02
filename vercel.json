@@ -21,7 +21,6 @@
         "APP_ROUTES_CACHE": "/tmp/routes.php",
         "APP_SERVICES_CACHE": "/tmp/services.php",
         "VIEW_COMPILED_PATH": "/tmp/views",
-        "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         "SSR_TEMP_PATH": "/tmp/ssr",
     }
