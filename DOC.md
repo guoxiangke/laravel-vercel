@@ -22,3 +22,4 @@ APP_DEBUG=true
 
 pdo_pgsql=10.21
 'sslmode' => 'require',
+verify-full
