@@ -26,3 +26,17 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/test/cache', function (){
+    $cacheKey = 'cacheKey';
+    $data = Cache::store('redis')->get($cacheKey, now()->format('Y-m-d H:i:s'));
+    Cache::store('redis')->put($cacheKey, $data, strtotime('tomorrow') - time());
+    return [$data];
+});
+
+Route::get('/test/cache2', function (){
+    $cacheKey = 'cacheKey2';
+    $data = Cache::get($cacheKey, now()->format('Y-m-d H:i:s'));
+    Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
+    return [$data];
+});
