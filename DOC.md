@@ -11,9 +11,14 @@ https://github.com/vercel-community/php/issues/140#issuecomment-761867702
 ## SQLSTATE[08006] [7] ERROR: Endpoint ID is not specified. Either please upgrade the postgres client library (libpq) for SNI support or pass the endpoint ID (first part of the domain name) as a parameter: '?options=endpoint%3D<endpoint-id>'. See more at https://neon.tech/sni
 ERROR: connection is insecure (try using `sslmode=require`) (Connection: pgsql, SQL: select * from "users" where "email" = 
 
+## TypeError
 
 #LOG_CHANNEL=stack
 CACHE_DRIVER=array
 APP_ENV=local
 APP_KEY=base64:6ur5gs8i34=
 APP_DEBUG=true
+
+
+pdo_pgsql=10.21
+'sslmode' => 'require',
