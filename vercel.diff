@@ -1,0 +1,90 @@
+diff --git a/api/assets.php b/api/assets.php
+index 9abaa46..dab3787 100644
+--- a/api/assets.php
++++ b/api/assets.php
+@@ -7,8 +7,10 @@
+ $file = $_GET['assets'];
+ if (str_ends_with($file, '.css')) {
+     header("Content-type: text/css; charset: UTF-8");
+-    echo require __DIR__ . '/../public/build/' . basename($file);
++    return require '/var/task/user/public/build/assets/' . basename($file);
++    // echo require __DIR__ . '/../assets/' . basename($file);
+ } else if (str_ends_with($file, '.js')) {
+     header('Content-Type: application/javascript; charset: UTF-8');
+-    echo require __DIR__ . '/../public/build/' . basename($file);
++    return require '/var/task/user/public/build/assets/' . basename($file);
++    // echo require __DIR__ . '/../assets/' . basename($file);
+ }
+\ No newline at end of file
+diff --git a/api/showdir.php b/api/showdir.php
+new file mode 100644
+index 0000000..f9f927c
+--- /dev/null
++++ b/api/showdir.php
+@@ -0,0 +1,22 @@
++<?php
++
++echo '<pre>';
++function getDirContents($dir, &$results = array()) {
++    $files = scandir($dir);
++
++    foreach ($files as $key => $value) {
++        $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
++        if (!is_dir($path)) {
++            $results[] = $path;
++        } else if ($value != "." && $value != "..") {
++            getDirContents($path, $results);
++            $results[] = $path;
++        }
++    }
++
++    return $results;
++}
++var_dump(getDirContents(__DIR__ . '/../public/'));
++return;
++
++require __DIR__ . '/../public/index.php';
+\ No newline at end of file
+diff --git a/app/Providers/AppServiceProvider.php b/app/Providers/AppServiceProvider.php
+index 452e6b6..c3e1e71 100644
+--- a/app/Providers/AppServiceProvider.php
++++ b/app/Providers/AppServiceProvider.php
+@@ -3,6 +3,7 @@
+ namespace App\Providers;
+ 
+ use Illuminate\Support\ServiceProvider;
++use Illuminate\Support\Facades\URL;
+ 
+ class AppServiceProvider extends ServiceProvider
+ {
+@@ -19,6 +20,8 @@ public function register(): void
+      */
+     public function boot(): void
+     {
+-        //
++        if ($this->app->environment() !== 'local') {
++            URL::forceScheme('https');
++        }
+     }
+ }
+diff --git a/vercel.json b/vercel.json
+index f8d783f..b8da822 100644
+--- a/vercel.json
++++ b/vercel.json
+@@ -1,13 +1,14 @@
+ {
+     "version": 2,
+     "functions": {
+-        "api/*.php": { "runtime": "vercel-php@0.6.0" }
++        "api/index.php": { "runtime": "vercel-php@0.6.0" },
++        "api/assets.php": { "runtime": "vercel-php@0.6.0" }
+     },
+     "routes": [
+         {
+             "src": "/build/assets/(.*)",
+             "dest": "/api/assets.php?assets=$1"
+-        },
++        }, 
+         {
+             "src": "/(.*)",
+             "dest": "/api/index.php"
