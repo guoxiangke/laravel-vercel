@@ -5,12 +5,12 @@
     },
     "routes": [
         {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
+            "src": "/build/assets/(.*)",
+            "dest": "/public/build/assets/$1"
         },
         {
-            "src": "/build/assets/(.*)",
-            "dest": "public/build/assets/$1"
+            "src": "/(.*)",
+            "dest": "/api/index.php"
         }
     ],
     "env": {
