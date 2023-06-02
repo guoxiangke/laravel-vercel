@@ -10,7 +10,7 @@
         },
         {
             "src": "/build/assets/(.*)",
-            "dest": "/api/assets.php?assets=$1"
+            "dest": "public/build/assets/$1"
         }
     ],
     "env": {
