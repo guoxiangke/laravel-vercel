@@ -22,4 +22,6 @@ APP_DEBUG=true
 
 pdo_pgsql=10.21
 'sslmode' => 'require',
-verify-full
+
+SQLSTATE[08006] [7] root certificate file "/home/sbx_user1051/.postgresql/root.crt" does not exist
+Either provide the file or change sslmode to disable server certificate verification. 
