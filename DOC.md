@@ -10,6 +10,7 @@ https://github.com/vercel-community/php/issues/140#issuecomment-761867702
 
 ## SQLSTATE[08006] [7] ERROR: Endpoint ID is not specified. Either please upgrade the postgres client library (libpq) for SNI support or pass the endpoint ID (first part of the domain name) as a parameter: '?options=endpoint%3D<endpoint-id>'. See more at https://neon.tech/sni
 ERROR: connection is insecure (try using `sslmode=require`) (Connection: pgsql, SQL: select * from "users" where "email" = 
+https://neon.tech/docs/connect/connectivity-issues
 
 ## TypeError
 
@@ -22,6 +23,7 @@ APP_DEBUG=true
 
 pdo_pgsql=10.21
 'sslmode' => 'require',
+'sslmode' => 'preferl',//verify-ful/require
 
 SQLSTATE[08006] [7] root certificate file "/home/sbx_user1051/.postgresql/root.crt" does not exist
 Either provide the file or change sslmode to disable server certificate verification. 

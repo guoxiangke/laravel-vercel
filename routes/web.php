@@ -40,3 +40,7 @@ Route::get('/test/cache2', function (){
     Cache::put($cacheKey, $data, strtotime('tomorrow') - time());
     return [$data];
 });
+
+Route::get('/test/db', function () {
+    dd(\App\Models\User::find(1)->get()->toArray());
+});
