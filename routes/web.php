@@ -41,6 +41,11 @@ Route::get('/test/cache2', function (){
     return [$data];
 });
 
+
+Route::get('/test/env', function (){
+    dd(env('DB_HOST'));
+});
+
 Route::get('/test/db', function () {
     dd(\App\Models\User::find(1)->get()->toArray());
 });
